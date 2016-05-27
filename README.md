@@ -3,8 +3,8 @@ Wearables stają się coraz bardziej popularne. Powoli wkraczają też do świat
 Twoim zadaniem będzie napisanie kontrolera do SmartWatcha, który na podstawie stanu pacjenta dobierze odpowiednią porcję
  leku.
 
-Aby poznać stan pacjenta, SmartWatch komunikuje się po Bluetooth Low Energy z niewielkim urządzeniem, monitorującym
-temperaturę ciała pacjenta i jego ciśnienie krwi (skurczowe).
+Aby poznać stan pacjenta, SmartWatch komunikuje się po Bluetooth Low Energy z niewielkim urządzeniem monitorującym 
+ciśnienie krwi pacjenta (skurczowe).
 
 Aby podać lek, SmartWatch komunikuje się ze specjalną pompą, podającą lek do krwi pacjenta.
 
