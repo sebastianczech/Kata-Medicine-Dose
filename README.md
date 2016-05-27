@@ -9,6 +9,7 @@ temperaturę ciała pacjenta i jego ciśnienie krwi (skurczowe).
 Aby podać lek, SmartWatch komunikuje się ze specjalną pompą, podającą lek do krwi pacjenta.
 
 Twój kontroler powinien obsłużyć następujące przypadki:
+
 1. Gdy ciśnienie spadnie poniżej 90, podaj 1 dawkę leku podnoszącego ciśnienie.
 2. Gdy ciśnienie spadnie poniżej 60, podaj 2 dawki leku podnoszącego ciśnienie.
 3. Gdy ciśnienie wzrośnie powyżej 150, podaj lek obniżający ciśnienie. 
