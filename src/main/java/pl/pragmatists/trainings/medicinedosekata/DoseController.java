@@ -29,24 +29,25 @@ public class DoseController {
         }
     }
 
-    private void doseLowPressure() {
-        medicinePump.dose(Medicine.PRESSURE_LOWERING_MEDICINE);
+    private boolean isPressureLess60() {
+        return healthMonitor.getSystolicBloodPressure()<60;
+    }
+
+    private boolean isPressureLess90() {
+        return healthMonitor.getSystolicBloodPressure()<90;
     }
 
     private boolean isPressureOver150() {
         return healthMonitor.getSystolicBloodPressure()>150;
     }
 
-    private boolean isPressureLess60() {
-        return healthMonitor.getSystolicBloodPressure()<60;
-    }
-
     private void doseRaisePressure() {
         medicinePump.dose(Medicine.PRESSURE_RAISING_MEDICINE);
     }
 
-    private boolean isPressureLess90() {
-        return healthMonitor.getSystolicBloodPressure()<90;
+    private void doseLowPressure() {
+        medicinePump.dose(Medicine.PRESSURE_LOWERING_MEDICINE);
     }
+
 
 }

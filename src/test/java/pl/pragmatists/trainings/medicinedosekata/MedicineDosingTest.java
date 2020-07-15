@@ -1,6 +1,5 @@
 package pl.pragmatists.trainings.medicinedosekata;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,9 +8,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.pragmatists.trainings.medicinedosekata.dependencies.AlertService;
+import pl.pragmatists.trainings.medicinedosekata.dependencies.DoseUnsuccessfulException;
 import pl.pragmatists.trainings.medicinedosekata.dependencies.HealthMonitor;
 import pl.pragmatists.trainings.medicinedosekata.dependencies.MedicinePump;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static pl.pragmatists.trainings.medicinedosekata.dependencies.Medicine.PRESSURE_LOWERING_MEDICINE;
 import static pl.pragmatists.trainings.medicinedosekata.dependencies.Medicine.PRESSURE_RAISING_MEDICINE;
 
@@ -58,5 +59,14 @@ public class MedicineDosingTest {
         doseController.checkHealthAndApplyMedicine();
 
         Mockito.verify(medicinePump).dose(PRESSURE_LOWERING_MEDICINE);
+    }
+
+    // Gdy pompa nie zadziała (może się to zdarzyć przy intensywnym ruchu ręką), ponów próbę.
+    @Test
+    public void should_repeat_dose_if_unsuccessful(){
+        assertThatThrownBy(() -> {
+            medicinePump.dose(PRESSURE_LOWERING_MEDICINE);
+        }).isInstanceOf(DoseUnsuccessfulException.class);
+
     }
 }
