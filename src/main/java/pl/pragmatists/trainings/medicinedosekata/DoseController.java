@@ -1,9 +1,6 @@
 package pl.pragmatists.trainings.medicinedosekata;
 
-import pl.pragmatists.trainings.medicinedosekata.dependencies.AlertService;
-import pl.pragmatists.trainings.medicinedosekata.dependencies.HealthMonitor;
-import pl.pragmatists.trainings.medicinedosekata.dependencies.Medicine;
-import pl.pragmatists.trainings.medicinedosekata.dependencies.MedicinePump;
+import pl.pragmatists.trainings.medicinedosekata.dependencies.*;
 
 public class DoseController {
 
@@ -42,12 +39,19 @@ public class DoseController {
     }
 
     private void doseRaisePressure() {
-        medicinePump.dose(Medicine.PRESSURE_RAISING_MEDICINE);
+        doseMedicine(Medicine.PRESSURE_RAISING_MEDICINE);
     }
 
     private void doseLowPressure() {
-        medicinePump.dose(Medicine.PRESSURE_LOWERING_MEDICINE);
+        doseMedicine(Medicine.PRESSURE_LOWERING_MEDICINE);
     }
 
+    private void doseMedicine(Medicine medicine) {
+        try {
+            medicinePump.dose(medicine);
+        } catch (DoseUnsuccessfulException doseUnsuccessfulException) {
+            medicinePump.dose(medicine);
+        }
+    }
 
 }

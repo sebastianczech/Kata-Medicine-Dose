@@ -64,9 +64,14 @@ public class MedicineDosingTest {
     // Gdy pompa nie zadziała (może się to zdarzyć przy intensywnym ruchu ręką), ponów próbę.
     @Test
     public void should_repeat_dose_if_unsuccessful(){
-        assertThatThrownBy(() -> {
-            medicinePump.dose(PRESSURE_LOWERING_MEDICINE);
-        }).isInstanceOf(DoseUnsuccessfulException.class);
+        Mockito.when(healthMonitor.getSystolicBloodPressure()).thenReturn(160);
 
+        Mockito.doThrow(DoseUnsuccessfulException.class)
+                .doNothing()
+                .when(medicinePump).dose(Mockito.any());
+
+        doseController.checkHealthAndApplyMedicine();
+
+        Mockito.verify(medicinePump,Mockito.times(2)).dose(Mockito.any());
     }
 }
