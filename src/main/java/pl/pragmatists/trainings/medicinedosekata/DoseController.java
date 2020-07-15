@@ -18,12 +18,35 @@ public class DoseController {
     }
 
     public void checkHealthAndApplyMedicine() {
-        if(healthMonitor.getSystolicBloodPressure()<90) {
-            medicinePump.dose(Medicine.PRESSURE_RAISING_MEDICINE);
+        if(isPressureLess90()) {
+            doseRaisePressure();
         }
-        if(healthMonitor.getSystolicBloodPressure()<60) {
-            medicinePump.dose(Medicine.PRESSURE_RAISING_MEDICINE);
+        if(isPressureLess60()) {
+            doseRaisePressure();
         }
+        if(isPressureOver150()) {
+            doseLowPressure();
+        }
+    }
+
+    private void doseLowPressure() {
+        medicinePump.dose(Medicine.PRESSURE_LOWERING_MEDICINE);
+    }
+
+    private boolean isPressureOver150() {
+        return healthMonitor.getSystolicBloodPressure()>150;
+    }
+
+    private boolean isPressureLess60() {
+        return healthMonitor.getSystolicBloodPressure()<60;
+    }
+
+    private void doseRaisePressure() {
+        medicinePump.dose(Medicine.PRESSURE_RAISING_MEDICINE);
+    }
+
+    private boolean isPressureLess90() {
+        return healthMonitor.getSystolicBloodPressure()<90;
     }
 
 }
