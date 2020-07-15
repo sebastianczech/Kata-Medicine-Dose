@@ -32,9 +32,17 @@ public class MedicineDosingTest {
     // Gdy ciśnienie spadnie poniżej 90, podaj 1 dawkę leku podnoszącego ciśnienie.
     @Test
     public void should_dose_medicine_when_pressure_lower_than_90() {
+        Mockito.when(healthMonitor.getSystolicBloodPressure()).thenReturn(80);
         doseController.checkHealthAndApplyMedicine();
 
         Mockito.verify(medicinePump).dose(PRESSURE_RAISING_MEDICINE);
     }
 
+    @Test
+    public void should_two_dose_medicine_when_pressure_lower_than_60() {
+        Mockito.when(healthMonitor.getSystolicBloodPressure()).thenReturn(50);
+        doseController.checkHealthAndApplyMedicine();
+
+        Mockito.verify(medicinePump,Mockito.times(2)).dose(PRESSURE_RAISING_MEDICINE);
+    }
 }
